@@ -1,9 +1,7 @@
 package com.sonalsatpute.etl.parsar;
 
-import com.sonalsatpute.etl.parsar.IContentParser;
 import com.sonalsatpute.etl.transformer.ICaseTransformer;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
 

@@ -1,7 +1,8 @@
 package com.sonalsatpute.elt.test;
 
+import com.sonalsatpute.etl.extractor.TextFileContentExtractor;
+import com.sonalsatpute.etl.extractor.TextFileContentParser;
 import com.sonalsatpute.etl.parsar.IContentParser;
-import com.sonalsatpute.etl.parsar.TextContentParser;
 import com.sonalsatpute.etl.transformer.TitleCaseTransformer;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ public class ParserTests {
     @Test
     public void Text_file_parser_should_parse_the_content_of_file() throws FileNotFoundException {
         InputStream inputstream = new FileInputStream("src/main/resources/input-file.txt");
-        IContentParser parser = new TextContentParser(inputstream, new TitleCaseTransformer());
+        IContentParser parser = new TextFileContentParser(inputstream, new TitleCaseTransformer());
 
         String actual = parser.execute();
 
