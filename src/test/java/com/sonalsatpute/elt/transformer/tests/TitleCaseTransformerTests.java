@@ -4,8 +4,6 @@ import com.sonalsatpute.etl.transformer.ICaseTransformer;
 import com.sonalsatpute.etl.transformer.TitleCaseTransformer;
 import org.junit.Test;
 
-import java.io.IOException;
-
 import static org.junit.Assert.assertEquals;
 
 public class TitleCaseTransformerTests {
