@@ -36,5 +36,7 @@ public class ContentProcessorTests {
         String expected = "I Am A Great Coder Who Loves To Solve Real World Problems.";
         assertEquals(expected, bufferedReader.readLine());
 
+        bufferedReader.close();
+        inputStream.close();
     }
 }

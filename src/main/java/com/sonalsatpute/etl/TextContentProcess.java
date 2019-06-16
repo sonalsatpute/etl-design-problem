@@ -29,7 +29,12 @@ public class TextContentProcess implements IProcessor {
         if(scanner.hasNextLine())
         {
             String content = this.transformer.process(scanner.nextLine());
-            this.loader.write(new StringContentExtractor(content).getInputStream());
+            InputStream processedInputStream = new StringContentExtractor(content).getInputStream();
+            this.loader.write(processedInputStream);
+            processedInputStream.close();
         }
+
+        bufferedReader.close();
+        inputStream.close();
     }
 }
