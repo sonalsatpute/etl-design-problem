@@ -11,7 +11,7 @@ public class FileContentLoader implements IContentLoader {
     }
 
     @Override
-    public InputStream load(InputStream inputStream) throws IOException {
+    public void write(InputStream inputStream) throws IOException {
         FileOutputStream outputStream = new FileOutputStream(fileId);
 
         int read;
@@ -21,7 +21,10 @@ public class FileContentLoader implements IContentLoader {
             outputStream.write(bytes, 0, read);
         }
         outputStream.close();
+    }
 
+    @Override
+    public InputStream getInputStream() throws FileNotFoundException {
         //Todo:
         // is there way to convert output stream to input stream?
         // reading file to to get input stream; seems to be overhead?

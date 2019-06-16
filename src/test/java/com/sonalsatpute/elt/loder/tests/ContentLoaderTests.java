@@ -1,6 +1,5 @@
 package com.sonalsatpute.elt.loder.tests;
 
-import com.sonalsatpute.etl.extractor.IContentExtractor;
 import com.sonalsatpute.etl.extractor.StringContentExtractor;
 import com.sonalsatpute.etl.loader.FileContentLoader;
 import com.sonalsatpute.etl.loader.IContentLoader;
@@ -20,10 +19,9 @@ public class ContentLoaderTests {
     public void String_content_should_load() throws IOException {
         String content = "I am a great coder who loves to solve real world problems.";
         IContentLoader loader = new StringContentLoader();
+        loader.write(new StringContentExtractor(content).getInputStream());
 
-        InputStream actualInputStream = loader.load(new StringContentExtractor().contentAsStream(content));
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(actualInputStream, StandardCharsets.UTF_8));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(loader.getInputStream(), StandardCharsets.UTF_8));
         assertEquals(content, bufferedReader.readLine());
     }
 
@@ -33,9 +31,9 @@ public class ContentLoaderTests {
         String content = "I am a great coder who loves to solve real world problems.";
         IContentLoader loader = new FileContentLoader(fileId);
 
-        InputStream inputStream = loader.load(new StringContentExtractor().contentAsStream(content));
+        loader.write(new StringContentExtractor(content).getInputStream());
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(loader.getInputStream(), StandardCharsets.UTF_8));
         assertEquals(content, bufferedReader.readLine());
     }
 

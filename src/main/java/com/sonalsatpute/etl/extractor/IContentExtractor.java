@@ -4,6 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public interface IContentExtractor {
-    InputStream contentAsStream(String source) throws IOException;
+    InputStream getInputStream() throws IOException;
 }
 

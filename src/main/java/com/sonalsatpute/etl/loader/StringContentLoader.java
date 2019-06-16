@@ -3,8 +3,14 @@ package com.sonalsatpute.etl.loader;
 import java.io.InputStream;
 
 public class StringContentLoader implements IContentLoader {
+    private InputStream inputStream;
     @Override
-    public InputStream load(InputStream inputStream) {
-        return inputStream;
+    public void write(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
+
+    @Override
+    public InputStream getInputStream() {
+        return this.inputStream;
     }
 }
