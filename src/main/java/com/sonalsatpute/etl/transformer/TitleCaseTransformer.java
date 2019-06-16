@@ -13,7 +13,7 @@ public class TitleCaseTransformer implements ICaseTransformer {
             String word = toTitleCase(words[index]);
 
             if (word.equals("")) continue;
-            if (isSecondLastPossion(index, words.length))
+            if (isSecondLastIndex(index, words.length))
                 result.append(word + " ");
             else
                 result.append(word);
@@ -22,9 +22,9 @@ public class TitleCaseTransformer implements ICaseTransformer {
         return result.toString();
     }
 
-    private boolean isSecondLastPossion(int index, int worldCount)
+    private boolean isSecondLastIndex(int index, int totalElements)
     {
-        return (index <= worldCount - 2);
+        return (index <= totalElements - 2);
     }
 
     private String toTitleCase(String word) {
