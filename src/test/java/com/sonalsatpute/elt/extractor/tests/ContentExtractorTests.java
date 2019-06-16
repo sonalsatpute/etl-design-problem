@@ -2,10 +2,11 @@ package com.sonalsatpute.elt.extractor.tests;
 
 import com.sonalsatpute.etl.extractor.IContentExtractor;
 import com.sonalsatpute.etl.extractor.StringContentExtractor;
-import com.sonalsatpute.etl.extractor.TextFileContentExtractor;
+import com.sonalsatpute.etl.extractor.FileContentExtractor;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,23 +15,29 @@ public class ContentExtractorTests {
     @Test
     public void String_content_extractor_should_convert_string_to_input_stream() throws IOException {
         String content = "I am a great coder who loves to solve real world problems.";
-        IContentExtractor reader = new StringContentExtractor();
+        IContentExtractor extractor = new StringContentExtractor();
 
-        InputStream actualInputStream = reader.contentAsStream(content);
+        InputStream actualInputStream = extractor.contentAsStream(content);
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(actualInputStream));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(actualInputStream, StandardCharsets.UTF_8));
         assertEquals(content, bufferedReader.readLine());
+
+        actualInputStream.close();
+        bufferedReader.close();
     }
 
     @Test
-    public void Text_file_content_extractor_should_convert_string_to_input_stream() throws IOException {
+    public void File_content_extractor_should_convert_content_to_input_stream() throws IOException {
         String fileId = "src/main/resources/input-file.txt";
-        IContentExtractor reader = new TextFileContentExtractor();
+        IContentExtractor extractor = new FileContentExtractor();
 
-        InputStream actualInputStream = reader.contentAsStream(fileId);
+        InputStream actualInputStream = extractor.contentAsStream(fileId);
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(actualInputStream));
         String expectedFileContent = "I  am a    great coder who loves to solve  real world problems.";
         assertEquals(expectedFileContent, bufferedReader.readLine());
+
+        actualInputStream.close();
+        bufferedReader.close();
     }
 }
