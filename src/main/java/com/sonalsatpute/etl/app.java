@@ -7,19 +7,21 @@ import com.sonalsatpute.etl.transformer.TitleCaseTransformer;
 import java.io.IOException;
 
 public class app {
-    public static void main(String[] args) {
+    public static int main(String[] args) {
         String inputFileId = "src/main/resources/input-file.txt";
         String outputFileId = "src/main/resources/output-file.txt";
 
-        TextContentProcess process = new TextContentProcess(
+        IProcessor process = new TextContentProcess(
                 new FileContentExtractor(inputFileId),
                 new TitleCaseTransformer(),
                 new FileContentLoader(outputFileId));
 
         try {
             process.run();
+            return 0;
         } catch (IOException e) {
             e.printStackTrace();
+            return -1;
         }
     }
 }
