@@ -7,9 +7,25 @@ import com.sonalsatpute.etl.transformer.TitleCaseTransformer;
 import java.io.IOException;
 
 public class app {
+    private static int SUCCESS = 0;
+    private static int FAIL = -1;
+
+    private static int ARGS_COUNT = 2;
+    private static int INPUT_INDEX = 0;
+    private static int OUTPUT_INDEX = 1;
+
     public static int main(String[] args) {
-        String inputFileId = "src/main/resources/input-file.txt";
-        String outputFileId = "src/main/resources/output-file.txt";
+        if (args == null){
+            System.out.println("missing arguments.");
+            return FAIL;
+        }
+        if (args.length != ARGS_COUNT) {
+            System.out.println("Invalid arguments.");
+            return FAIL;
+        }
+
+        String inputFileId = args[INPUT_INDEX];
+        String outputFileId = args[OUTPUT_INDEX];
 
         IProcessor process = new TextContentProcess(
                 new FileContentExtractor(inputFileId),
@@ -18,10 +34,10 @@ public class app {
 
         try {
             process.run();
-            return 0;
-        } catch (IOException e) {
+            return SUCCESS;
+        } catch (Exception e) {
             e.printStackTrace();
-            return -1;
+            return FAIL;
         }
     }
 }
