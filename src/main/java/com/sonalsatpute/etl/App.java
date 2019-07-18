@@ -4,9 +4,7 @@ import com.sonalsatpute.etl.extractor.FileContentExtractor;
 import com.sonalsatpute.etl.loader.FileContentLoader;
 import com.sonalsatpute.etl.transformer.TitleCaseTransformer;
 
-import java.io.IOException;
-
-public class app {
+public class App {
     private static int SUCCESS = 0;
     private static int FAIL = -1;
 
